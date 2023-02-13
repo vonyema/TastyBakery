@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -25,9 +26,9 @@ MEDIA_URL = '/media/'
 SECRET_KEY = 'django-insecure-f)s(+j8t*%@%e1pze#^ooiwh1)(mp^_5a0y7a@bzaqorge&q4u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tasty-bakery.herokuapp.com','localhost', '127.0.0.1']
 
 
 # Application definition
@@ -121,8 +122,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import django_heroku
+TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
+django_heroku.settings(locals())
+
