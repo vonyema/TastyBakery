@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from .models import *
 from .forms import OrderForm, RegisterForm
 from django.contrib.auth.forms import UserCreationForm  
+from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
@@ -76,9 +77,19 @@ def registerPage(request):
         form=RegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('login')
 
     return render(request, 'account/register.html', {
         'form':form
     })
 def loginPage(request):
-    return render(request, 'accounts/login.html')
+    if request.method == 'POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user=authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+
+    return render(request, 'account/login.html')
