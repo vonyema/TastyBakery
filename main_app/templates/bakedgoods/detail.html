@@ -20,14 +20,14 @@
                 <form action="" method="POST">
                     {% csrf_token %}
                     {{ order_form.as_p }}
-                    <input type="submit" value="Add To Cart" class="btn blue">
+                    <button data-bakedgood={{bakedgood.id}} data-action="add" class="btn btn-outline-secondary add btn update-cart">Add to Cart</button>
                 </form>
             </div>
         </div>
     </div>
 </div> 
 
-<script>
+<!-- <script>
   // variables
   const dateEl = document.getElementById('id_date');
   const mealEl = document.getElementById('id_meal');
@@ -41,6 +41,6 @@
   });
 
   M.FormSelect.init(mealEl);
-</script>
+</script> -->
 
 {% endblock %}
