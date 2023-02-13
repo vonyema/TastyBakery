@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="box-element cart">
+            <a  class="btn btn-outline-dark" href="{% url 'index' %}">&#x2190; Continue Shopping</a>
+            <br>
+            <br>
+            <table class="table">
+                <tr>
+                    <th><h5>Total:<strong> ${{order.get_shoppingcart_total}}</strong></h5></th>
+                    <th>
+                        <a  style="float:right; margin:5px;" class="btn btn-success" href="">Checkout</a>
+                    </th>
+                </tr>
+            </table>
+		</div>
+		<br>
+		<div class="box-element">
+            <div class="cart-row">
+                <div style="flex:2"></div>
+                <div style="flex:2"><strong>Item</strong></div>
+                <div style="flex:1"><strong>Price</strong></div>
+            </div>
+            {% for item in items %}
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="{{item.item.image.url}}"></div>
+                <div style="flex:2"><p><strong>{{item.item.name}}</strong></p></div>
+                <div style="flex:1"><p><strong>${{item.item.price|floatformat:2}}</strong></p></div>
+		</div>
+            {%endfor%}
+	</div>
+</div>
+</div>
+
+{% endblock %}

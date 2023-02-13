@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Order Details</h1>
+
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-img-top">
+                    <img src="{{ bakedgood.image.url }}" alt="{{bakedgood.name}}" class="card-img">
+                </div>
+                <span class="card-title">{{ bakedgood.name }}</span>
+                <p>Price: starting at {{ bakedgood.price }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ order_form.as_p }}
+                    <input type="submit" value="Add To Cart" class="btn blue">
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<script>
+  // variables
+  const dateEl = document.getElementById('id_date');
+  const mealEl = document.getElementById('id_meal');
+
+  // materialize form widget config
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+
+  M.FormSelect.init(mealEl);
+</script>
+
+{% endblock %}
