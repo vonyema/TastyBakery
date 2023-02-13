@@ -1,6 +1,6 @@
 const updateButton= document.getElementsByClassName("update-cart")
 
-for (let i=0; i< updateButton.length; i++){
+for (let i=0; i < updateButton.length; i++){
     updateButton[i].addEventListener('click', function(){
         const bakedgoodId= this.dataset.bakedgood
         const action= this.dataset.action
@@ -10,25 +10,23 @@ for (let i=0; i< updateButton.length; i++){
         if(user=='AnonymousUser'){
             console.log('Not logged in');
         }else{
-            console.log('User logged in');
+            addToUserCart(bakedgoodId, action)
         }
     })
 }
 function addToUserCart (bakedgoodId, action){
-    const url='/add_order/'
-    fetch (url, {
+    var url='/add_order/'
+    fetch(url, {
         method: 'POST',
         header:{
             'Content-Type':'application/json',
-            'X-CSRFToken':csrftoken,
         },
         body:JSON.stringify({'bakedgoodId': bakedgoodId, 'action' : action})
     })
     .then((response)=>{
-        return response.json();
+        return response.text();
     })
     .then((data)=>{
         console.log('data:', data)
-        location.reload()
     });
 }

@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import json
 from django.http import JsonResponse
 from .models import *
 from .forms import OrderForm, RegisterForm
 from django.contrib.auth.forms import UserCreationForm  
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+
+
+
 
 
 def home(request):
@@ -20,6 +25,8 @@ def bakedgood_detail(request, bakedgood_id):
         'bakedgood':bakedgood,
         'order_form':order_form
     })
+
+@login_required(login_url='/accounts/login/')   
 def add_order(request, bakedgood_id):
   # capture submitted form inputs
   form = OrderForm(request.POST)
@@ -35,10 +42,13 @@ def add_order(request, bakedgood_id):
   # NOTE: we need to import the built-in redirect function/method
   return redirect('detail', bakedgood_id=bakedgood_id)
 
+@login_required(login_url='/accounts/login/')
 class OrderCreate(CreateView):
   model = Ingredient
   fields = '__all__'
 
+@login_required(login_url='/account/login/')
+@csrf_exempt
 def shoppingcart(request):
 
 
@@ -53,23 +63,31 @@ def shoppingcart(request):
         cartItems=order['get_shoppingcart_items']
     context={'items': items,'customer':customer,'order':order, 'cartItems':cartItems}
     return render(request, 'bakedgoods/cart.html',context)
+
+@login_required(login_url='/accounts/login/')
+@csrf_exempt
 def addItem(request):
-    data= json.loads(request.body.decode("utf-8"))
+    data= json.loads(request.body)
     bakedgoodId=data['bakedgoodId']
     action=data['action']
-    print('Action:',action)
-    print('Product:',bakedgoodId)
+    print('Action:', action)
+    print('Product:', bakedgoodId)
 
     customer= request.user.customer
-    bakedgood= Baked_Goods.objects.get(id=bakedgoodId)
+    item= Baked_Goods.objects.get(id=bakedgoodId)
     order, created= Order.objects.get_or_create(customer=customer, order_status=False )
-    orderItem, created= OrderItem.objects.get_or_create(order=order, bakedgood=bakedgood)
+    orderItem, created= OrderItem.objects.get_or_create(order=order, item=item)
 
     orderItem.save()
     return JsonResponse('Item was added', safe=False)
+
 class EditCart(UpdateView):
     model=Ingredient
     fields='__all__'
+    success_url='/cart/'
+
+class DeleteCart(DeleteView):
+    model=OrderItem
     success_url='/cart/'
 def registerPage(request):
     form= RegisterForm()

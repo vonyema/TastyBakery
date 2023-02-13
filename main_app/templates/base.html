@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,8 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-<script type="text/javascript">const user= '{{request.user}}'
+<script type="text/javascript">
+const user= '{{request.user}}'
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {

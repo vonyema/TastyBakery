@@ -17,30 +17,13 @@
     <div class="col s6">
         <div class="card">
             <div class="card-content">
-                <form action="{% url 'add' %}" method="POST">
                     {% csrf_token %}
                     {{ order_form.as_p }}
-                    <button data-bakedgood={{bakedgood.id}} data-action="add" class="btn btn-outline-secondary add btn update-cart">Add to Cart</button>
-                </form>
+                    <button data-bakedgood="{{bakedgood.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
             </div>
         </div>
     </div>
 </div> 
-
-<!-- <script>
-  // variables
-  const dateEl = document.getElementById('id_date');
-  const mealEl = document.getElementById('id_meal');
-
-  // materialize form widget config
-  M.Datepicker.init(dateEl, {
-    format: 'yyyy-mm-dd',
-    defaultDate: new Date(),
-    setDefaultDate: true,
-    autoClose: true
-  });
-
-  M.FormSelect.init(mealEl);
-</script> -->
 
 {% endblock %}

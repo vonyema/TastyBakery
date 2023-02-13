@@ -5,20 +5,23 @@
 		<div class="col-lg-4">
             <div class="card">
             {% for cake in bakedgoods%}
-        <div class="card-img-top">
-            <img src="{{ cake.image.url }}" alt="{{cake.name}}" class="card-img-index">
+                <div class="card-img-top">
+                    <img src="{{ cake.image.url }}" alt="{{cake.name}}" class="card-img-index">
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title text-center">{{cake.name}}</h4>
+                        <p class="card-text text-center">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </p>
+                    <a href="{% url 'detail' cake.id %}" class="btn btn-default btn-lg btn-block">View</a>
+                {% endfor %} 
+                </div>
+            </div>
         </div>
-        <div class="card-block">
-          <h4 class="card-title text-center">{{cake.name}}</h4>
-            <p class="card-text text-center">
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-            </p>
-          <a href="{% url 'detail' cake.id %}" class="btn btn-default btn-lg btn-block">View</a>
-        </div>
-        </div>
-      </div>
-{% endfor %} {% endblock %}
+    </div>
+</div>
+    {% endblock %}

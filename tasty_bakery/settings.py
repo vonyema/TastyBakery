@@ -57,7 +57,9 @@ ROOT_URLCONF = 'tasty_bakery.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            '/allproducts/<int:bakedgood_id>'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
