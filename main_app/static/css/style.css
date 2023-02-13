@@ -1,13 +1,27 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,800|Roboto+Slab:300);
-
-
+@import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Sassy+Frass&family=Zeyada&display=swap');
 body {
   font-family: "Roboto Slab","Helvetica", "Arial", sans-serif;;
   padding-top: 70px;
   margin-top: 30px;
 }
-.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+.col-lg-4, .col-lg-6, .col-lg-8{
 	margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+.col-lg-12{
+  margin-top:10px;
+}
+.jumbotron.title.text-center {
+  border-style: double;
+  border-width: 50px;
+  margin-top: 100px;
+}
+h1.title{
+  font-family: 'Zeyada', cursive;
+  font-weight: 600;
+  font-size: 80px;
 }
 p {
   margin: 0 0 52px;
@@ -74,10 +88,14 @@ img.card-img-index{
 
 }
 main.container{
+  margin-top: 20px;
+}
+.index-container{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
 }
 i.tiny.material-icons {
   font-size: 30px;
@@ -111,7 +129,9 @@ icon-bar:hover{
   color:#FF5252;
 }
 
-/* navbar */
+.nav{
+  margin-top: 10px;
+}
 .navbar-default {
     border-color: #FF5252;
 }
@@ -141,11 +161,11 @@ a {
   border-bottom: 1px solid #ececec;
 
 }
-
-/* .logo-image{
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-top: -6px;
-} */
+.navbar-brand{
+  font-family: 'Petit Formal Script', cursive;
+  font-size: 20px;
+  font-weight: 900;
+}
+a.btn.btn-default.btn-lg.btn-block {
+  margin-bottom: 20px;
+}

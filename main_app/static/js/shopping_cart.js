@@ -8,9 +8,10 @@ for (let i=0; i < updateButton.length; i++){
 
         console.log('User:',user)
         if(user=='AnonymousUser'){
-            console.log('Not logged in');
+            alert('Must log in to continue!');
         }else{
             addToUserCart(bakedgoodId, action)
+            alert('Added to cart')
         }
     })
 }

@@ -12,5 +12,6 @@ urlpatterns = [
     path('cart/<int:pk>/delete/',views.DeleteCart.as_view(),name='deletecart'),
     path('register/', views.registerPage, name='register'),
     path('login/', views.loginPage, name='login'),
+    path('logout/', views.logoutPage, name='logout'),
 
 ]

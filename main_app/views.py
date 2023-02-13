@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+
 
 
 
@@ -19,6 +21,16 @@ def index(request):
     bakedgoods=Baked_Goods.objects.all()
     return render(request,'bakedgoods/index.html', {'bakedgoods':bakedgoods} )
 def bakedgood_detail(request, bakedgood_id):
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created= Order.objects.get_or_create(customer=customer, order_status=False )
+        items= order.orderitem_set.all()
+        cartItems=order.get_shoppingcart_items
+    else:
+        items=[]
+        order={'get_shoppingcart_total':0, 'get_shoppingcart_items':0}
+        cartItems=order['get_shoppingcart_items']
+
     order_form=OrderForm()
     bakedgood= Baked_Goods.objects.get(id=bakedgood_id)
     return render(request, 'bakedgoods/detail.html',{
@@ -26,7 +38,7 @@ def bakedgood_detail(request, bakedgood_id):
         'order_form':order_form
     })
 
-@login_required(login_url='/accounts/login/')   
+@login_required(login_url='login/')   
 def add_order(request, bakedgood_id):
   # capture submitted form inputs
   form = OrderForm(request.POST)
@@ -42,12 +54,11 @@ def add_order(request, bakedgood_id):
   # NOTE: we need to import the built-in redirect function/method
   return redirect('detail', bakedgood_id=bakedgood_id)
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='login/')
 class OrderCreate(CreateView):
   model = Ingredient
   fields = '__all__'
 
-@login_required(login_url='/account/login/')
 @csrf_exempt
 def shoppingcart(request):
 
@@ -61,10 +72,10 @@ def shoppingcart(request):
         items=[]
         order={'get_shoppingcart_total':0, 'get_shoppingcart_items':0}
         cartItems=order['get_shoppingcart_items']
-    context={'items': items,'customer':customer,'order':order, 'cartItems':cartItems}
+    context={'items': items,'order':order, 'cartItems':cartItems}
     return render(request, 'bakedgoods/cart.html',context)
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='login/')
 @csrf_exempt
 def addItem(request):
     data= json.loads(request.body)
@@ -82,7 +93,7 @@ def addItem(request):
     return JsonResponse('Item was added', safe=False)
 
 class EditCart(UpdateView):
-    model=Ingredient
+    model=OrderItem
     fields='__all__'
     success_url='/cart/'
 
@@ -111,3 +122,8 @@ def loginPage(request):
             return redirect('home')
 
     return render(request, 'account/login.html')
+@login_required
+def logoutPage(request):
+    logout(request)
+    messages.add_message(request, messages.INFO,"Logged out")
+    return redirect('home')

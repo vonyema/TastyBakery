@@ -54,7 +54,10 @@ class Ingredient(models.Model):
         verbose_name='Add Ons',
         )
     additional=models.CharField(max_length=100)
+    objects = models.Manager()
 
+    def __str__(self):
+        return f"{self.serving_size},{self.filling},{self.frosting},{self.addons}"
     def get_object(self, queryset=None):
         return Ingredient.objects.get(uuid=self.kwargs.get("uuid"))
 
@@ -107,7 +110,9 @@ class OrderItem(models.Model):
     order=models.ForeignKey(Order,on_delete=models.SET_NULL, null=True)
     date=models.DateTimeField(auto_now_add=True)
     quantity= models.IntegerField(default=1, null=True, blank=True)
+    ingredients= models.ManyToManyField(Ingredient)
 
+    
     @property
     def get_total(self):
         total= self.item.price

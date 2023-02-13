@@ -40,7 +40,15 @@ const csrftoken = getCookie('csrftoken');
         <a class="navbar-brand" href="/">Tasty Bakery</a>
       </div>
       <div class="nav">
-        <a href="{% url 'register' %}"class="btn btn-warning login">Login</a>
+        {% if user.is_authenticated %}
+          <a class="btn btn-warning login" href="{% url 'logout' %}">
+            Log out <i class="fas fa-sign-out-alt"></i>
+          </a>
+        {% else %}
+          <a class="btn btn-warning login" href="{% url 'register' %}">
+            Log in <i class="fas fa-sign-in-alt"></i>
+          </a>
+        {% endif %}
         <a href="{% url 'cart' %}">
           <div id="nav navbar-nav navbar-right">
             <a href="{% url 'cart' %}"><i class="tiny material-icons">add_shopping_cart</i></a>
