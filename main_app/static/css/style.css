@@ -14,7 +14,7 @@ p {
   font-weight: bolder;
 }
 img.card-img-index{
-  width: 100%;
+  width: 250px;
 }
 .login{
   float: right;
@@ -45,12 +45,16 @@ img.card-img-index{
   height: 250px;
   padding-bottom: 50%;
   transition: 0.1s linear;
-  background-image: url(http://www.freeallimages.com/wp-content/uploads/2014/09/space-cat-wallpaper-5.jpg);
   background-size: cover;
   background-position: center center;
 }
 .row{
   display: flex;
+}
+.row-index{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .card-title {
   margin-bottom: 1rem;
@@ -68,6 +72,11 @@ img.card-img-index{
 .title {
   color: black;
 
+}
+main.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 i.tiny.material-icons {
   font-size: 30px;

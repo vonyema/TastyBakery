@@ -6,5 +6,10 @@ urlpatterns = [
     path('allproducts/',views.index, name='index'),
     path('allproducts/<int:bakedgood_id>/', views.bakedgood_detail, name='detail'),
     path('allproducts/<int:bakedgood_id>/add_detail/', views.add_order, name='add_'),
+    path('add_order/', views.addItem, name='add'),
     path('cart/', views.shoppingcart, name="cart"),
+    path('cart/<int:pk>/update/',views.EditCart.as_view(),name='editcart'),
+    path('account/register/', views.registerPage, name='register'),
+    path('account/login/', views.loginPage, name='login'),
+
 ]

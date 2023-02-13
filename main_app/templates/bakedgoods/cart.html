@@ -26,8 +26,11 @@
             {% for item in items %}
             <div class="cart-row">
                 <div style="flex:2"><img class="row-image" src="{{item.item.image.url}}"></div>
-                <div style="flex:2"><p><strong>{{item.item.name}}</strong></p></div>
+                <div style="flex:2"><p><strong><a href="{% url 'detail' item.id %}">{{item.item.name}}</a></strong></p></div>
                 <div style="flex:1"><p><strong>${{item.item.price|floatformat:2}}</strong></p></div>
+                <div style="flex:1"><p><strong><a href="{% url 'editcart' item.id %}">Edit</a></strong></p></div>
+                <div style="flex:1"><p><strong>${{item.item.price|floatformat:2}}</strong></p></div>
+
 		</div>
             {%endfor%}
 	</div>

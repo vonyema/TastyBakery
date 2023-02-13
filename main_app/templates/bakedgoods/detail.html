@@ -17,7 +17,7 @@
     <div class="col s6">
         <div class="card">
             <div class="card-content">
-                <form action="" method="POST">
+                <form action="{% url 'add' %}" method="POST">
                     {% csrf_token %}
                     {{ order_form.as_p }}
                     <button data-bakedgood={{bakedgood.id}} data-action="add" class="btn btn-outline-secondary add btn update-cart">Add to Cart</button>

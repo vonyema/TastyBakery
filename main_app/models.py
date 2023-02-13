@@ -55,6 +55,9 @@ class Ingredient(models.Model):
         )
     additional=models.CharField(max_length=100)
 
+    def get_object(self, queryset=None):
+        return Ingredient.objects.get(uuid=self.kwargs.get("uuid"))
+
     
 class Baked_Goods(models.Model):
     name=models.CharField(max_length=100)
@@ -93,11 +96,17 @@ class Order(models.Model):
         orderitems=self.orderitem_set.all()
         total= sum([item.get_total for item in orderitems])
         return total
+    @property
+    def get_shoppingcart_items(self):
+        orderitems=self.orderitem_set.all()
+        total= sum([item.quantity for item in orderitems])
+        return total
 
 class OrderItem(models.Model):
     item=models.ForeignKey(Baked_Goods,on_delete=models.SET_NULL,blank=True, null=True)
     order=models.ForeignKey(Order,on_delete=models.SET_NULL, null=True)
     date=models.DateTimeField(auto_now_add=True)
+    quantity= models.IntegerField(default=1, null=True, blank=True)
 
     @property
     def get_total(self):
