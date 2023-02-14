@@ -82,7 +82,11 @@ WSGI_APPLICATION = 'tasty_bakery.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tastybakery',
+        'NAME': 'vonyema/tasty_bakery',
+        'USER': 'vonyema',
+        'PASSWORD': 'v2_3z7uQ_Hmy3P8rAUtQv6UJLkEBPPhn',
+        'HOST': 'db.bit.io',
+        'PORT': '5432',
     }
 }
 
@@ -130,7 +134,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import django_heroku
+import django_on_heroku
 TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
 
