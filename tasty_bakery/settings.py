@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-f)s(+j8t*%@%e1pze#^ooiwh1)(mp^_5a0y7a@bzaqorge&q4u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tasty-bakery.herokuapp.com','localhost', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -135,6 +135,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import django_on_heroku
-TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
 django_on_heroku.settings(locals())
 
