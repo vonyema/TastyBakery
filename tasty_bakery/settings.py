@@ -128,8 +128,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Set the directory where your static files are stored during development
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'media'),
+    os.path.join(BASE_DIR, 'media', 'bakedgoods'),
 ]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
