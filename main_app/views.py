@@ -121,7 +121,7 @@ def loginPage(request):
             login(request, user)
             return redirect('home')
 
-    return render(request, 'account/login.html')
+    return render(request, 'registration/login.html')
 @login_required
 def logoutPage(request):
     logout(request)
