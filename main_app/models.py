@@ -1,12 +1,13 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 SERVING=[
     ('6/2','6 inch 2 layers/ serves 8-12 '),
     ('6/3', '6 inch 3 layers/ serves 12-15'),
     ('8/2', '8 inch 2 layers/ serves 14-20'),
     ('8/3', '8 inch 3 layers/ serves 18-20'),
-
     ('10/2', '10 inch 2 layers/ serves 20-32'),
     ('10/3', '10 inch 3 layers/ serves 20-32'),
 ]
@@ -118,3 +119,11 @@ class OrderItem(models.Model):
         total= self.item.price
         return total
 
+@receiver(post_save, sender=User)
+def create_customer(sender, instance, created, **kwargs):
+    if created:
+        Customer.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_customer(sender, instance, **kwargs):
+    instance.customer.save()
